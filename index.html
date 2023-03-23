@@ -1194,19 +1194,18 @@
         <div class="card card-body">Card</div>
 
        <!-- Modal -->
- 
-
-       <div id="myModal" class="modal">
-         <div class="modal-content">
-           <span class="close">&times;</span>
-           <p>Modal content goes here.</p>
-         </div>
-       </div><button id="open-modal">Open Modal</button>
-
 <div id="myModal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
-    <p>Modal content goes here.</p>
+    
+    <form action="#" method="post" enctype="multipart/form-data" class="p-5">
+      <input type="file" id="file" name="file[]" multiple><br><br>
+      <input type="button" value="Upload" onclick="uploadFiles()">
+    </form>
+    <br><br>
+    <h2>List of Uploaded Files</h2>
+    <ul id="fileList">
+    </ul>
   </div>
 </div>
       </div>
@@ -1240,7 +1239,22 @@ $(document).ready(function() {
     }
   });
 });
-    </script>
+</script>
+
+<script>
+  function uploadFiles() {
+    var files = document.getElementById("file").files;
+    var fileList = document.getElementById("fileList");
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+      var fileName = file.name;
+      var fileExtension = fileName.substr(fileName.lastIndexOf('.')+1);
+      var listItem = document.createElement("li");
+      listItem.innerHTML = fileName + " (" + fileExtension + ")";
+      fileList.appendChild(listItem);
+    }
+  }
+</script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
   </body>
   </body>
